@@ -1,32 +1,29 @@
-import React from "react"
+import React from 'react'
 import Select from 'react-select';
 import { throttle } from 'lodash';
+import config from './config';
 
 class UsedCarPrices extends React.Component {
 	constructor(props){
 		super(props);
 
 		this.state = {
-			manufacturer_id:"",
-			manufacturer_name:"",
-			model_name:"",
-			options: [],
-			selectedOption: "",
-			inputValue: ""
+			backEndDomain: config.backEndDomain,
+			manufacturerOptions: [],
+			modelOptions: [],
+			manufacturerOption: "",
+			modelOption: "",
 		};
 
 		this.handleChange = this.handleChange.bind(this)
-		this.throttledHandleSearch = throttle(this.handleSearch, 500).bind(this);
+		this.throttledHandleManufacturerSearch = throttle(this.handleManufacturerSearch, 500).bind(this);
+		this.throttledHandleModelSearch = throttle(this.handleModelSearch, 500).bind(this);
 	}
 
-  handleSearch = (inputValue) => {
-
-		this.setState({
-			inputValue: inputValue,
-		})
+  handleManufacturerSearch = (inputValue) => {
 
   	if(inputValue != "" && inputValue != null){
-			fetch(`http://localhost:3001/manufacturer?manufacturer_name=${inputValue}`, {
+			fetch(`${this.state.backEndDomain}/manufacturer?manufacturer_name=${inputValue}`, {
 			  method: 'GET'
 			})
 			.then((response) => response.json())
@@ -38,7 +35,9 @@ class UsedCarPrices extends React.Component {
 						)
 					});
 					this.setState({
-						options: options,
+						manufacturerOptions: options,
+						modelOptions: [],
+						modelOption: "",
 					});
 				}else{
 					this.setState({
@@ -51,11 +50,43 @@ class UsedCarPrices extends React.Component {
 
   };
 
-  handleSelect = (selectedOption) => {
-    this.setState({ selectedOption: selectedOption });
+  handleModelSearch = (inputValue) => {
+
+  	if(inputValue != "" && inputValue != null){
+			fetch(`${this.state.backEndDomain}/model?manufacturer_id=${this.state.manufacturerOption.value}&model_name=${inputValue}`, {
+			  method: 'GET'
+			})
+			.then((response) => response.json())
+			.then((responseJson) => {
+				if(!("errors" in responseJson)){
+					var options = responseJson.map((row) =>{
+						return(
+							{label:row.name, value:row.name}
+						)
+					});
+					this.setState({
+						modelOptions: options,
+					});
+				}else{
+					this.setState({
+					});
+				}
+			})
+			.catch((error) => {
+  		})
+  	}
+
   };
 
-	handleChange(event){
+  handleManufacturerSelect = (selectedOption) => {
+    this.setState({ manufacturerOption: selectedOption });
+  };
+
+  handleModelSelect = (selectedOption) => {
+    this.setState({ modelOption: selectedOption });
+  };
+
+	handleChange = (event) => {
 		const name = event.target.name
 		const value = event.target.type == 'checkbox' ? event.target.checked : event.target.value
 
@@ -70,13 +101,24 @@ class UsedCarPrices extends React.Component {
 				<form className="row">
 
 					<div className="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<label>Select</label>
+						<label>Select manufacturer</label>
       			<Select
       				className=""
-      			  value={this.state.selectedOption}
-      			  options={this.state.options}
-      			  onChange={this.handleSelect}
-							onInputChange={this.throttledHandleSearch}
+      			  value={this.state.manufacturerOption}
+      			  options={this.state.manufacturerOptions}
+      			  onChange={this.handleManufacturerSelect}
+							onInputChange={this.throttledHandleManufacturerSearch}
+      			/>
+					</div>
+
+					<div className="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+						<label>Select model</label>
+      			<Select
+      				className=""
+      			  value={this.state.modelOption}
+      			  options={this.state.modelOptions}
+      			  onChange={this.handleModelSelect}
+							onInputChange={this.throttledHandleModelSearch}
       			/>
 					</div>
 
