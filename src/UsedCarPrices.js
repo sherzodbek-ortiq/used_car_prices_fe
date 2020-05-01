@@ -1,6 +1,11 @@
 import React from 'react'
 import Select from 'react-select';
 import { throttle } from 'lodash';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import config from './config';
 
 class UsedCarPrices extends React.Component {
@@ -97,7 +102,7 @@ class UsedCarPrices extends React.Component {
 
 	render(){
 		return(
-			<div className="">
+			<div className="container pt-3">
 				<form className="row">
 
 					<div className="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
