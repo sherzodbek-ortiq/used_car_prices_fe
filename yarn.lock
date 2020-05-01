@@ -9450,6 +9450,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
 
+simple-react-validator@^1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/simple-react-validator/-/simple-react-validator-1.4.6.tgz#df3079c39e5b7c5c57d378279a74a8e4dee8673f"
+  integrity sha512-t0hP8krMfHwPBhsvSmSVfYU7DqdHQxDB6gGuqtUcaxIArPurBWytISj/ZCLnqaj33/cYNXOfVz6LoI9OIefsiA==
+
 simple-swizzle@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"
