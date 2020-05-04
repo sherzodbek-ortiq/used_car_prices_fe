@@ -152,13 +152,13 @@ class UsedCarPrices extends React.Component {
 			    'Content-Type': 'application/json'
 			  },
 			  body: JSON.stringify({
+					year: this.state.year,
 					manufacturer: this.state.manufacturerOption.label,
 					model: this.state.modelOption.label,
-					title_status: this.state.titleStatusOption.value,
 					fuel: this.state.fuelOption.value,
-					transmission: this.state.transmissionOption.value,
-					year: this.state.year,
 					odometer: this.state.odometer
+					title_status: this.state.titleStatusOption.value,
+					transmission: this.state.transmissionOption.value,
 				})
 			})
 			.then((response) => response.json())
