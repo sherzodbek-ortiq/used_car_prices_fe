@@ -33,7 +33,7 @@ class UsedCarPrices extends React.Component {
 			],
 			fuelOption: "",
 			transmissionOptions: [
-				{label: "Automatic", value: "Automatic"},
+				{label: "Automatic", value: "automatic"},
 				{label: "Manual", value: "manual"},
 				{label: "Other", value: "other"}
 			],
