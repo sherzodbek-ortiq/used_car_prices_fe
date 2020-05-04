@@ -156,9 +156,9 @@ class UsedCarPrices extends React.Component {
 					manufacturer: this.state.manufacturerOption.label,
 					model: this.state.modelOption.label,
 					fuel: this.state.fuelOption.value,
-					odometer: this.state.odometer
+					odometer: this.state.odometer,
 					title_status: this.state.titleStatusOption.value,
-					transmission: this.state.transmissionOption.value,
+					transmission: this.state.transmissionOption.value
 				})
 			})
 			.then((response) => response.json())
